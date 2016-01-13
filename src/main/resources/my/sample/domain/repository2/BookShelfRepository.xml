@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="my.sample.domain.repository2.BookShelfRepository">
+
+  <select id="findByShelfId" resultMap="findByShelfId-map">
+    select
+    shelf_id,
+    isbn
+    from bookshelf
+    where shelf_id = #{shelfId}
+  </select>
+
+  <select id="invalidSql" resultMap="findByShelfId-map">
+    select
+    shelf_id,
+    isbn
+    from invalid_table
+    where shelf_id = #{shelfId}
+  </select>
+
+
+  <resultMap type="my.sample.domain.model.BookShelf" id="findByShelfId-map">
+    <result column="shelf_id" property="shelfId" />
+    <result column="isbn" property="isbn" />
+  </resultMap>
+</mapper>
